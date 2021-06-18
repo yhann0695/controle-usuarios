@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/people")
@@ -22,5 +23,11 @@ public class PersonController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MessageResponseDTO> createPerson(@RequestBody @Valid PersonDTO person) {
         return ResponseEntity.ok(personService.save(person));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PersonDTO>> listAll() {
+        List<PersonDTO> allPeaple = personService.listAll();
+        return ResponseEntity.ok(allPeaple);
     }
 }
