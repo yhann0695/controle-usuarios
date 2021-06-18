@@ -1,4 +1,4 @@
-package one.digitalinnovation.personapi.cursoDigitalInnovation.entity;
+package one.digitalinnovation.personapi.cursoDigitalInnovation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,27 +6,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import one.digitalinnovation.personapi.cursoDigitalInnovation.enums.PhoneType;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "TB_PHONE")
-public class Phone implements Serializable {
+public class PhoneDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_PHONE")
     private Long id;
 
-    @Column(nullable = false, name = "TYPE")
     @Enumerated(EnumType.STRING)
     private PhoneType type;
 
-    @Column(nullable = false, name = "NUMBER")
+    @NotEmpty
+    @Size(min = 13, max = 14)
     private String number;
 
     public Long getId() {
